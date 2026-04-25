@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giftly AI | Personalized Gift Builder</title>
+  <meta name="description" content="AI personalized gift builder for every occasion." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="#" class="brand"><span class="brand-mark">✦</span><span>Giftly AI</span></a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#builder">Build Gift</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#delivery">Delivery</a>
+    </nav>
+    <a href="#builder" class="header-btn">Start</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">AI-powered personalized gifts</p>
+        <h1>Describe the person. AI builds a unique gift for them.</h1>
+        <p class="hero-text">For birthdays, Mother’s Day, Valentine’s, graduation, weddings, thank-you gifts and more. Choose, customize, and request delivery.</p>
+        <div class="hero-actions">
+          <a href="#builder" class="primary-btn">Create a gift</a>
+          <a href="#how" class="secondary-btn">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="floating-card top">For Mom · Birthday · $50 budget</div>
+        <div class="gift-preview">
+          <div class="gift-box">🎁</div>
+          <h3>Warm Wellness Box</h3>
+          <p>Customized candle, flowers, handwritten card, and relaxing tea set.</p>
+        </div>
+        <div class="floating-card bottom">Same-day delivery optional</div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="section-title">
+        <p class="eyebrow">Simple flow</p>
+        <h2>From idea to personalized gift</h2>
+      </div>
+      <div class="steps-grid">
+        <article><span>01</span><h3>Tell us about them</h3><p>Who is it for? What do they love? What is the occasion and budget?</p></article>
+        <article><span>02</span><h3>AI creates ideas</h3><p>The system suggests gift concepts, products, wrapping style, and message cards.</p></article>
+        <article><span>03</span><h3>Customize everything</h3><p>Select items, remove products, add notes, change colors, and choose delivery.</p></article>
+      </div>
+    </section>
+
+    <section id="builder" class="builder-section">
+      <div class="builder-panel">
+        <div class="section-title left">
+          <p class="eyebrow">Gift builder</p>
+          <h2>Create a personalized gift</h2>
+          <p>Fill the form, or write a natural prompt like: “I want a gift for my mom. She loves flowers and coffee. Budget $60.”</p>
+        </div>
+
+        <form id="giftForm" class="gift-form">
+          <div class="form-row">
+            <label>Recipient
+              <input id="recipient" placeholder="Mom, friend, fiancé, teacher..." required />
+            </label>
+            <label>Occasion
+              <select id="occasion">
+                <option>Birthday</option>
+                <option>Mother's Day</option>
+                <option>Valentine's Day</option>
+                <option>Graduation</option>
+                <option>Wedding</option>
+                <option>Anniversary</option>
+                <option>Thank You</option>
+                <option>New Baby</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>Budget
+              <input id="budget" placeholder="$30 - $80" />
+            </label>
+            <label>Delivery
+              <select id="delivery">
+                <option>Pickup</option>
+                <option>Delivery optional</option>
+                <option>Same-day delivery</option>
+              </select>
+            </label>
+          </div>
+
+          <label>Prompt / Details
+            <textarea id="prompt" rows="6" placeholder="Example: I want a special gift for my mom. She loves coffee, flowers, skincare, elegant things, and calm colors. I want it for her birthday."></textarea>
+          </label>
+
+          <button id="generateBtn" type="submit" class="primary-btn full">Generate Gift Ideas</button>
+          <p id="formMessage" class="form-message"></p>
+        </form>
+      </div>
+
+      <aside class="results-panel">
+        <div class="results-header">
+          <h3>AI Gift Results</h3>
+          <button id="clearBtn" class="mini-btn">Clear</button>
+        </div>
+        <div id="loading" class="loading hidden"><span></span><p>Creating personalized gifts...</p></div>
+        <div id="results" class="results-empty">Your AI gift ideas will appear here.</div>
+      </aside>
+    </section>
+
+    <section id="customizer" class="section hidden">
+      <div class="section-title">
+        <p class="eyebrow">Customize</p>
+        <h2>Your selected gift</h2>
+      </div>
+      <div id="customizerContent" class="customizer-card"></div>
+    </section>
+
+    <section id="occasions" class="section soft">
+      <div class="section-title">
+        <p class="eyebrow">Occasions</p>
+        <h2>Built for every moment</h2>
+      </div>
+      <div class="occasion-grid">
+        <div>🎂 Birthdays</div><div>💐 Mother’s Day</div><div>❤️ Valentine’s</div><div>🎓 Graduation</div><div>💍 Weddings</div><div>🙏 Thank You</div>
+      </div>
+    </section>
+
+    <section id="delivery" class="delivery-section">
+      <div>
+        <p class="eyebrow">Delivery system</p>
+        <h2>Ready for pickup or driver delivery</h2>
+        <p>In this MVP, delivery is requested in the order summary. Later, you can add driver accounts, live status, and tracking.</p>
+      </div>
+      <a href="#builder" class="primary-btn">Build now</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Giftly AI. Personalized gift builder MVP.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
