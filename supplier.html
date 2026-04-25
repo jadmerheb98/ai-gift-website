@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supplier Product Submission</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #faf5ef;
+      color: #24150f;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: auto;
+      padding: 30px 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+    }
+
+    p {
+      color: #6d5c52;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      border-radius: 14px;
+      border: 1px solid #ddd0c5;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px;
+      border: 0;
+      border-radius: 18px;
+      background: #25150f;
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .note {
+      background: #f7eadb;
+      padding: 14px;
+      border-radius: 16px;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    @media(max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="card">
+      <h1>Supplier Product Submission</h1>
+      <p>
+        Please fill the product details below. These products may be used for customized gift boxes and delivery orders.
+      </p>
+
+      <div class="note">
+        Please send one product at a time. After submitting, WhatsApp will open with the full product details.
+      </div>
+
+      <form id="supplierForm">
+        <label>Supplier / Shop Name</label>
+        <input id="supplierName" required placeholder="Example: Rose Boutique" />
+
+        <label>Contact Person</label>
+        <input id="contactPerson" required placeholder="Example: Jad" />
+
+        <label>Phone Number</label>
+        <input id="phone" required placeholder="Example: 71884882" />
+
+        <label>Product Name</label>
+        <input id="productName" required placeholder="Example: Premium Flower Bouquet" />
+
+        <label>Category</label>
+        <select id="category" required>
+          <option value="">Select category</option>
+          <option>Flowers</option>
+          <option>Chocolate</option>
+          <option>Perfume</option>
+          <option>Jewelry</option>
+          <option>Candles</option>
+          <option>Skincare</option>
+          <option>Coffee / Tea</option>
+          <option>Home Decor</option>
+          <option>Personalized Item</option>
+          <option>Other</option>
+        </select>
+
+        <div class="grid">
+          <div>
+            <label>Selling Price to Customer ($)</label>
+            <input id="sellingPrice" type="number" required placeholder="Example: 50" />
+          </div>
+
+          <div>
+            <label>Cost Price for Us ($)</label>
+            <input id="costPrice" type="number" required placeholder="Example: 35" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label>Available Stock</label>
+            <input id="stock" type="number" required placeholder="Example: 10" />
+          </div>
+
+          <div>
+            <label>Preparation Time</label>
+            <select id="prepTime" required>
+              <option>Ready now</option>
+              <option>Same day</option>
+              <option>24 hours</option>
+              <option>48 hours</option>
+              <option>Custom</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Product Description</label>
+        <textarea id="description" rows="4" required placeholder="Describe the product, colors, size, material, etc."></textarea>
+
+        <label>Customization Options</label>
+        <textarea id="customization" rows="3" placeholder="Example: name tag, color choice, message card, wrapping options"></textarea>
+
+        <label>Product Photo Link</label>
+        <input id="photoLink" placeholder="Paste Google Drive / Instagram / website photo link if available" />
+
+        <label>Notes</label>
+        <textarea id="notes" rows="3" placeholder="Any extra notes, delivery limits, minimum order, etc."></textarea>
+
+        <button type="submit">Send Product on WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const YOUR_WHATSAPP_NUMBER = "96171884882";
+
+    document.getElementById("supplierForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const selling = Number(document.getElementById("sellingPrice").value || 0);
+      const cost = Number(document.getElementById("costPrice").value || 0);
+      const profit = selling - cost;
+
+      const message =
+`NEW SUPPLIER PRODUCT
+
+Supplier: ${value("supplierName")}
+Contact Person: ${value("contactPerson")}
+Phone: ${value("phone")}
+
+Product: ${value("productName")}
+Category: ${value("category")}
+
+Selling Price: $${selling}
+Cost Price for Us: $${cost}
+Estimated Profit: $${profit}
+
+Stock: ${value("stock")}
+Preparation Time: ${value("prepTime")}
+
+Description:
+${value("description")}
+
+Customization:
+${value("customization") || "None"}
+
+Photo Link:
+${value("photoLink") || "Not provided"}
+
+Notes:
+${value("notes") || "None"}`;
+
+      const url = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    });
+
+    function value(id) {
+      return document.getElementById(id).value.trim();
+    }
+  </script>
+
+</body>
+</html>
