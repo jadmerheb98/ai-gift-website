@@ -1,4 +1,4 @@
-const API_URL = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev/generate-gift"; // Replace after deploying Cloudflare Worker
+const API_URL = "https://gift-ai-worker.padelin-lb.workers.dev/"; // Replace after deploying Cloudflare Worker
 
 const form = document.getElementById("giftForm");
 const results = document.getElementById("results");
